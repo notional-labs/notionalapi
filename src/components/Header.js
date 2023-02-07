@@ -1,8 +1,14 @@
 import Link from 'next/link';
 import getConfig from 'next/config';
 import { Button } from 'antd';
-import { LoginOutlined, EditOutlined } from '@ant-design/icons';
+import {
+  LoginOutlined,
+  EditOutlined,
+  ShoppingOutlined,
+  KeyOutlined,
+} from '@ant-design/icons';
 import { color_white } from '../constants/CustomTheme';
+import { Menu } from 'antd';
 
 // Only holds serverRuntimeConfig and publicRuntimeConfig from next.config.js nothing else.
 const { publicRuntimeConfig: { staticFolder } } = getConfig();
@@ -44,12 +50,25 @@ const Header = () => (
         right: 20px;
       }
     `}</style>
+
     <Link href='/'>
       <div className='logo-container'>
         <img className='logo' alt='logo' src={`${staticFolder}/logo.png`} />
         <a className='sys-name'>NotionalApi</a>
       </div>
     </Link>
+
+    <div style={{paddingLeft: '200px'}}>
+      <Menu mode='horizontal'>
+        <Menu.Item key='apikeys' icon={<KeyOutlined />}>
+          <Link href='/apikeys'> Api-Keys </Link>
+        </Menu.Item>
+        <Menu.Item key='points'  icon={<ShoppingOutlined />}>
+          <Link href='/points'>  Points </Link>
+        </Menu.Item>
+      </Menu>
+    </div>
+
     <div className='right-container'>
       <Button style={{ margin: '0 10px' }} type='primary' ghost>
         <LoginOutlined />

@@ -2072,11 +2072,6 @@ duplexer@^0.1.2:
   resolved "https://registry.npm.taobao.org/duplexer/download/duplexer-0.1.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fduplexer%2Fdownload%2Fduplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"
   integrity sha1-Or5DrvODX4rgd9E23c4PJ2sEAOY=
 
-dynamic-antd-theme@latest:
-  version "0.4.1"
-  resolved "https://registry.npm.taobao.org/dynamic-antd-theme/download/dynamic-antd-theme-0.4.1.tgz#284cc34162197c6943d2fb6ae0728b3fc07471f7"
-  integrity sha1-KEzDQWIZfGlD0vtq4HKLP8B0cfc=
-
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
