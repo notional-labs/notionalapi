@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'next-antd-scaffold',
+      name: 'notional-api',
       script: './server.js', // start script
       cwd: './', // current workspace
       watch: [

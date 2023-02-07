@@ -1,9 +1,9 @@
 {
-  "name": "next-antd-scafflod",
+  "name": "notional-api",
   "version": "1.0.0",
-  "description": "A react ssr scafflod with ant-design based on Next.js.",
+  "description": "Notional Api",
   "main": "server.js",
-  "author": "luffyZh",
+  "author": "notional.ventures",
   "license": "MIT",
   "husky": {
     "hooks": {

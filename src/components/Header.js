@@ -47,7 +47,7 @@ const Header = () => (
     <Link href='/'>
       <div className='logo-container'>
         <img className='logo' alt='logo' src={`${staticFolder}/logo.png`} />
-        <a className='sys-name'>Next-Antd-Scaffold</a>
+        <a className='sys-name'>NotionalApi</a>
       </div>
     </Link>
     <div className='right-container'>
