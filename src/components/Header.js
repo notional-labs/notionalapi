@@ -70,10 +70,12 @@ const Header = () => (
     </div>
 
     <div className='right-container'>
-      <Button style={{ margin: '0 10px' }} type='primary' ghost>
-        <LoginOutlined />
-        Login
-      </Button>
+      <Link href='/login'>
+        <Button style={{ margin: '0 10px' }} type='primary' ghost>
+          <LoginOutlined />
+          Login
+        </Button>
+      </Link>
       <Button type='primary'>
         <EditOutlined />
         Register
