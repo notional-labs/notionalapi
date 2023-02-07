@@ -1,5 +1,20 @@
+
 {
-  "presets": ["next/babel"],
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env":  {
+          "useBuiltIns": "usage",
+          "corejs": 2,
+          "targets": {
+            "ie": 11
+          }
+        }
+      }
+    ]
+  ],
   "plugins": [
+    ["@babel/plugin-transform-runtime"]
   ]
 }
