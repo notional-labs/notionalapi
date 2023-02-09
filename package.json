@@ -11,6 +11,7 @@
     "@ant-design/icons": "^5.0.1",
     "@prisma/client": "^4.10.1",
     "antd": "^5.2.0",
+    "crypto": "^1.0.1",
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
     "next": "latest",
