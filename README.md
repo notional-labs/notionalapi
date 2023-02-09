@@ -7,11 +7,8 @@ An Api Gateway for Cosmos chains.
 # to install packages
 yarn
 
-# to create a sqlite dev-db in /prisma/dev.db
+# to create a sqlite dev-db in /prisma/dev.db with some dummy data into dev-db
 yarn dev_db_init
-
-# to insert some dummy data into dev-db
-yarn dev_db_dummy_data
 
 # start webapp at http://localhost:3000
 yarn dev
