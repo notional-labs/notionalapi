@@ -21,6 +21,23 @@ const SessionTest = () => {
   )
 }
 
+const MainNav = () => {
+  // const {data: session} = useSession()
+  // if (session) {
+    return (
+      <Menu mode='horizontal'>
+        <Menu.Item key='apikeys' icon={<KeyOutlined/>}>
+          <Link href='/apikeys'> Api-Keys </Link>
+        </Menu.Item>
+        <Menu.Item key='points' icon={<ShoppingOutlined/>}>
+          <Link href='/points'> Points </Link>
+        </Menu.Item>
+      </Menu>
+    )
+  // }
+  // return (null)
+}
+
 const HeaderLoginButtons = () => {
   const {data: session} = useSession()
   if (session) {
@@ -59,14 +76,7 @@ export default function MainLayout({children}) {
       <Header style={{background: "white"}}>
         <div style={{ float: 'left', width: '120px', height: '31px', fontSize: 'large'}}><Link href='/'>NotionalApi</Link></div>
         <div style={{ float: 'right'}}><HeaderLoginButtons /></div>
-        <Menu mode='horizontal'>
-          <Menu.Item key='apikeys' icon={<KeyOutlined />}>
-            <Link href='/apikeys'> Api-Keys </Link>
-          </Menu.Item>
-          <Menu.Item key='points'  icon={<ShoppingOutlined />}>
-            <Link href='/points'>  Points </Link>
-          </Menu.Item>
-        </Menu>
+        <MainNav />
       </Header>
 
       <Content style={{padding: '0'}}>
