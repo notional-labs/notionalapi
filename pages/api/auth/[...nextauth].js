@@ -1,9 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from '@prisma/client';
+import {findUserByEmail} from '../../../helper/db';
 var crypto = require('crypto')
-
-const prisma = new PrismaClient()
 
 export const authOptions = {
   providers: [
@@ -18,22 +16,19 @@ export const authOptions = {
         password: {label: "Password", type: "password"}
       },
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        // const user = {email: "jsmith@example.com"}
-        const user = await prisma.user.findUnique({where: {email: credentials.email}});
+        const user = await findUserByEmail(credentials.email);
 
-        // compare sha256(password) and user.pass_hash
-        const input_hash = crypto.createHash('sha256').update(credentials.password).digest('hex');
+        if (user) {
+          // compare sha256(password) and user.pass_hash
+          const input_hash = crypto.createHash('sha256').update(credentials.password).digest('hex');
 
-        if (input_hash === user.pass_hash) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+          if (input_hash === user.pass_hash) {
+            // Any object returned will be saved in `user` property of the JWT
+            return user
+          }
         }
+
+        return null;
       }
     })
   ],
