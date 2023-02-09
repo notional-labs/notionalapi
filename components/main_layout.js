@@ -22,8 +22,8 @@ const SessionTest = () => {
 }
 
 const MainNav = () => {
-  // const {data: session} = useSession()
-  // if (session) {
+  const {data: session} = useSession()
+  if (session) {
     return (
       <Menu mode='horizontal'>
         <Menu.Item key='apikeys' icon={<KeyOutlined/>}>
@@ -34,8 +34,8 @@ const MainNav = () => {
         </Menu.Item>
       </Menu>
     )
-  // }
-  // return (null)
+  }
+  return (null)
 }
 
 const HeaderLoginButtons = () => {
