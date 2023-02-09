@@ -1,16 +1,11 @@
-// export async function getStaticProps() {
-//     const allPostsData = getSortedPostsData();
-//     return {
-//         props: {
-//             allPostsData,
-//         },
-//     };
-// }
+import { useSession } from "next-auth/react";
 
 export default function Home() {
-  return (
-    <>
-      Home page
-    </>
-  );
+  const {data: session} = useSession()
+  if (session) {
+    return (
+      <>Hello {session.user.email}</>
+    )
+  }
+  return (<>Hello guest, please sign-in to continue.</>)
 }

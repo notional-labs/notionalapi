@@ -1,4 +1,5 @@
 import { List, Button, Space } from 'antd';
+import { useSession } from "next-auth/react";
 
 const data = [
   {
@@ -16,26 +17,31 @@ const data = [
 ];
 
 export default function ApiKeys() {
-  return (
-    <>
-      <Space>
-        <h3>Api-Keys</h3>
-        <Button>New Key</Button>
-      </Space>
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item
-            actions={[<a key="list-view-key">Show Key</a>, <a key="list-delete-key">Delete</a>]}
-          >
-            <List.Item.Meta
-              title={item.name}
-              description={<div>{item.desc}<br />{item.created_date}</div>}
-            />
-          </List.Item>
-        )}
-      />
-    </>
-  );
+  const {data: session} = useSession()
+
+  if (session) {
+    return (
+      <>
+        <Space>
+          <h3>Api-Keys</h3>
+          <Button>New Key</Button>
+        </Space>
+        <List
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={(item) => (
+            <List.Item
+              actions={[<a key="list-view-key">Show Key</a>, <a key="list-delete-key">Delete</a>]}
+            >
+              <List.Item.Meta
+                title={item.name}
+                description={<div>{item.desc}<br/>{item.created_date}</div>}
+              />
+            </List.Item>
+          )}
+        />
+      </>
+    );
+  }
+  return (<>Hello guest, please sign-in to continue.</>)
 }
