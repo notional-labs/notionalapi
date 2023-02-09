@@ -1,9 +1,8 @@
 # NotionalApi
 An Api Gateway for Cosmos chains.
 
-### Getting started
 
-Run this to create a sqlite dev db in `/prisma/dev.db`
+### Getting started
 ```console
 # to install packages
 yarn
