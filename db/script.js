@@ -25,6 +25,27 @@ async function main() {
   }
 
   {
+    // Seed the database with points
+    const user1_point = await prisma.point.create({
+      data: {
+        email: 'alice@notionalapi.com',
+        point: 1000000,
+      },
+    })
+    const user2_point = await prisma.point.create({
+      data: {
+        email: 'bob@notionalapi.com',
+        point: 2000000,
+      },
+    })
+    console.log(`Created points for users: ${user1_point.email} (${user1_point.point}) and ${user2_point.email} (${user2_point.point}) `);
+
+    // Retrieve all points
+    const allPoints = await prisma.point.findMany({ })
+    console.log(`Retrieved all points: `, allPoints)
+  }
+
+  {
     // Seed the database with apikeys
     const alice_key1 = await prisma.apikey.create({
       data: {

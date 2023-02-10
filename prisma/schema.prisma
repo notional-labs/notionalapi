@@ -19,3 +19,8 @@ model Apikey {
   note  String?
   created_at  DateTime @default(now())
 }
+
+model Point {
+  email String  @id
+  point Int @default(0)
+}
