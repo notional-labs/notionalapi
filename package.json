@@ -4,8 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "dev_db_init": "rm prisma/dev.db && prisma db push",
-    "dev_db_dummy_data": "node ./db/script.js"
+    "dev_db_init": "rm prisma/dev.db && prisma db push && node ./db/script.js"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
@@ -19,7 +18,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "remark": "^14.0.2",
-    "remark-html": "^15.0.1"
+    "remark-html": "^15.0.1",
+    "swr": "^2.0.3"
   },
   "devDependencies": {
     "prisma": "^4.10.1"

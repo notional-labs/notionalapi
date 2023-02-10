@@ -1,31 +1,16 @@
 import { List, Button, Space } from 'antd';
 import { useSession } from "next-auth/react";
+import useSWR from 'swr';
 
-const data = [
-  {
-    name: 'Dev Api Key 1',
-    key: '28e60dbef52d6c2a2fa385fa04c2cd0880a71517b5c4f0e2ed28efc393a9e9ce',
-    desc: 'for development environment',
-    created_date: '2022-03-25T12:00:00Z',
-  },
-  {
-    name: 'Prod Api Key 1',
-    key: '9b855c9035fbcba8e212b58b5f813402be54245041081c36b2d75a2344416095',
-    desc: 'for production environment',
-    created_date: '2023-01-20T15:00:00Z',
-  },
-];
+const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export default function ApiKeys() {
   const {data: session, status} = useSession()
+  const { data, error, isLoading } = useSWR('/api/my_apikeys', fetcher)
 
-  if (status === "loading") {
-    return <p>Loading...</p>
-  }
-
-  if (status === "unauthenticated") {
-    return <p>Access Denied.</p>
-  }
+  if (status === "loading" || isLoading) return <p>Loading...</p>
+  if (status === "unauthenticated") return <p>Access Denied.</p>
+  if (error) return <p>failed to load</p>
 
   return (
     <>
@@ -42,7 +27,7 @@ export default function ApiKeys() {
           >
             <List.Item.Meta
               title={item.name}
-              description={<div>{item.desc}<br/>{item.created_date}</div>}
+              description={<div>{item.note}<br/>{item.created_at}</div>}
             />
           </List.Item>
         )}

@@ -11,3 +11,11 @@ model User {
   email String  @id
   pass_hash  String?
 }
+
+model Apikey {
+  apikey String  @id
+  email String
+  name  String?
+  note  String?
+  created_at  DateTime @default(now())
+}
