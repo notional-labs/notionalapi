@@ -1,12 +1,6 @@
 import { Button, Form, Input, InputNumber } from 'antd';
 import { useSession } from "next-auth/react";
 
-/* eslint-disable no-template-curly-in-string */
-const validateMessages = {
-  required: '${label} is required!',
-};
-/* eslint-enable no-template-curly-in-string */
-
 const onFinish = (values) => {
   console.log(values);
 };
