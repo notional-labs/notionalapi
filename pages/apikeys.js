@@ -2,6 +2,7 @@ import { List, Button, Space, Modal } from 'antd';
 import { useSession } from "next-auth/react";
 import useSWR from 'swr';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
@@ -17,7 +18,7 @@ export default function ApiKeys() {
     <>
       <Space>
         <h3>Api-Keys</h3>
-        <Button>New Key</Button>
+        <Link href='/create_apikey'><Button>New Key</Button></Link>
       </Space>
       <List
         itemLayout="horizontal"
