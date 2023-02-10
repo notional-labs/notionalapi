@@ -7,22 +7,11 @@ const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export default function ApiKeys() {
   const {data: session, status} = useSession()
-  const { data, error, isLoading } = useSWR('/api/my_apikeys', fetcher)
+  const { data, error, isLoading } = useSWR('/api/my_apikeys', fetcher);
 
   if (status === "loading" || isLoading) return <p>Loading...</p>
   if (status === "unauthenticated") return <p>Access Denied.</p>
   if (error) return <p>failed to load</p>
-
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const showModal = () => {
-  //   setIsModalOpen(true);
-  // };
-  // const handleOk = () => {
-  //   setIsModalOpen(false);
-  // };
-  // const handleCancel = () => {
-  //   setIsModalOpen(false);
-  // };
 
   return (
     <>
@@ -36,7 +25,10 @@ export default function ApiKeys() {
         renderItem={(item) => (
           <List.Item
             actions={[<Button type="text" onClick={() => {
-              alert(item.apikey);
+              Modal.info({
+                title: 'Api Key',
+                content: (<>{item.apikey}</>),
+              });
             }}>Show Key</Button>, <a key="list-delete-key">Delete</a>]}
           >
             <List.Item.Meta
