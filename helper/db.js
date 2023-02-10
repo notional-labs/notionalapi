@@ -10,3 +10,8 @@ export const listApiKeysByUser = async (email) => {
   const apikeys = await prisma.apikey.findMany({where: {email}});
   return apikeys;
 }
+
+export const findPoint = async (email) => {
+  const point = await prisma.point.findUnique({where: {email}});
+  return point;
+}
