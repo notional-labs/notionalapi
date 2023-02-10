@@ -1,15 +1,31 @@
-import { Button, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useSession } from "next-auth/react";
-
-const onFinish = (values) => {
-  console.log(values);
-};
 
 export default function CreateApiKey() {
   const {data: session, status} = useSession();
 
   if (status === "loading") return <p>Loading...</p>
   if (status === "unauthenticated") return <p>Access Denied.</p>
+
+  const onFinish = async (values) => {
+    const rawResponse = await fetch('/api/create_apikey', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values),
+    });
+    const content = await rawResponse.json();
+    console.log(`content=${JSON.stringify(content)}`);
+    const {apikey} = content;
+    if (apikey) {
+      alert("created OK!");
+      return;
+    }
+
+    alert("created failed!");
+  };
 
   return (
     <>
