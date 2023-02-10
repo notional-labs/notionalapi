@@ -7,6 +7,6 @@ export const findUserByEmail = async (email) => {
 }
 
 export const listApiKeysByUser = async (email) => {
-  const user = await prisma.user.findMany({where: {email}});
-  return user;
+  const apikeys = await prisma.apikey.findMany({where: {email}});
+  return apikeys;
 }
