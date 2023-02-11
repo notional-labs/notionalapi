@@ -2,21 +2,31 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 
 export const findUserByEmail = async (email) => {
-  const user = await prisma.user.findUnique({where: {email}});
-  return user;
+  const item = await prisma.user.findUnique({where: {email}});
+  return item;
 }
 
 export const listApiKeysByUser = async (email) => {
-  const apikeys = await prisma.apikey.findMany({where: {email}});
-  return apikeys;
+  const items = await prisma.apikey.findMany({where: {email}});
+  return items;
 }
 
 export const findPoint = async (email) => {
-  const point = await prisma.point.findUnique({where: {email}});
-  return point;
+  const item = await prisma.point.findUnique({where: {email}});
+  return item;
+}
+
+export const findApiKey = async (apikey) => {
+  const item = await prisma.apikey.findUnique({where: {apikey}});
+  return item;
 }
 
 export const createApiKey = async (newkey) => {
   const item = await prisma.apikey.create({data: newkey});
+  return item;
+}
+
+export const deleteApiKey = async (key) => {
+  const item = await prisma.apikey.delete({where: {apikey: key}});
   return item;
 }
