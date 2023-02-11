@@ -12,6 +12,8 @@ yarn dev_db_init
 
 # start webapp at http://localhost:3000
 yarn dev
+
+# login with alice@notionalapi.com (password alice) or bob@notionalapi.com (password bob)
 ```
 
 
