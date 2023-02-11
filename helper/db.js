@@ -15,3 +15,8 @@ export const findPoint = async (email) => {
   const point = await prisma.point.findUnique({where: {email}});
   return point;
 }
+
+export const createApiKey = async (newkey) => {
+  const item = await prisma.apikey.create({data: newkey});
+  return item;
+}
