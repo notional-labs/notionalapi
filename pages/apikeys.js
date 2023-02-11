@@ -9,7 +9,8 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
 export default function ApiKeys() {
-  const {data: session, status} = useSession()
+  const {data: session, status} = useSession();
+  const [loading, setLoading] = useState(false);
   const { data, error, isLoading, mutate } = useSWR('/api/my_apikeys', fetcher);
   const [messageApi, contextHolder] = message.useMessage();
 
