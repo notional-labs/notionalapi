@@ -26,7 +26,7 @@ yarn dev
 - api-key:
 	- [x] listing api-keys
 	- [x] adding new api-key
-	- [ ] deleting an api-key
+	- [x] deleting an api-key
 
 - point system:
 	- [ ] ordering points with a payment gateway (pay.binance.com or coinbase.com/commerce or osmosis USDC)
