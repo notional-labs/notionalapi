@@ -19,12 +19,12 @@ yarn dev
 - user:
 	- [ ] reg with email
 	- [x] login/logout
-	- [ ]reset password
+	- [ ] reset password
 
 - api-key:
 	- [x] listing api-keys
 	- [x] adding new api-key
-	- [ ]deleting an api-key
+	- [ ] deleting an api-key
 
 - point system:
 	- [ ] ordering points with a payment gateway (pay.binance.com or coinbase.com/commerce or osmosis USDC)
