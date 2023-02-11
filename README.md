@@ -29,6 +29,4 @@ yarn dev
 - point system:
 	- [ ] ordering points with a payment gateway (pay.binance.com or coinbase.com/commerce or osmosis USDC)
 	- [ ] view historical orders
-	- [ ] view points usage
-		+ status
-		+ historical (daily)
+	- [x] view point status
