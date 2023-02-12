@@ -1,6 +1,8 @@
 # NotionalApi
 An Api Gateway for Cosmos chains.
 
+Live staging: https://staging.notionalapi.com/
+
 
 ### Getting started
 ```console
