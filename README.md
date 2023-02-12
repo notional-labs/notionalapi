@@ -15,20 +15,3 @@ yarn dev
 
 # login with alice@notionalapi.com (password alice) or bob@notionalapi.com (password bob)
 ```
-
-
-### MVP 1:
-- user:
-	- [ ] reg with email
-	- [x] login/logout
-	- [ ] reset password
-
-- api-key:
-	- [x] listing api-keys
-	- [x] adding new api-key
-	- [x] deleting an api-key
-
-- point system:
-	- [ ] ordering points with a payment gateway (pay.binance.com or coinbase.com/commerce or osmosis USDC)
-	- [ ] view historical orders
-	- [x] view point status
