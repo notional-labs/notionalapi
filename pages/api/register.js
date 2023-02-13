@@ -37,6 +37,6 @@ export default async (req, res) => {
     }
 
     const savedItem = await createRegistration(newItem);
-    res.send(savedItem);
+    res.send({email});
   }
 }
