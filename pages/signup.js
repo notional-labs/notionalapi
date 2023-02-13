@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
 
-export default function Home() {
+export default function Signup() {
   const {data: session, status} = useSession();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState("");

@@ -1,6 +1,11 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 
+export const createUser = async (newItem) => {
+  const item = await prisma.user.create({data: newItem});
+  return item;
+}
+
 export const findUserByEmail = async (email) => {
   const item = await prisma.user.findUnique({where: {email}});
   return item;
@@ -38,5 +43,10 @@ export const createRegistration = async (newItem) => {
 
 export const findRegistrationByEmail = async (email) => {
   const item = await prisma.registration.findUnique({where: {email}});
+  return item;
+}
+
+export const deleteRegistration = async (email) => {
+  const item = await prisma.registration.delete({where: {email}});
   return item;
 }
