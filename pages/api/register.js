@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 import { createRegistration, findRegistrationByEmail, findUserByEmail } from "../../helper/db";
+import { sendMailActive } from "../../helper/mail";
 const crypto = require("crypto");
 
 export default async (req, res) => {
@@ -37,6 +38,10 @@ export default async (req, res) => {
     }
 
     const savedItem = await createRegistration(newItem);
+
+    const activation_url = `https://notionalapi.com/reg_active?email=${email}&activation_code=${activation_code}`;
+    await sendMailActive(email, activation_url)
+
     res.send({email});
   }
 }
