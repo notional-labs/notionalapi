@@ -3,9 +3,16 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export const sendMailActive = async (recipient, activation_url) => {
-  const text = `sdafasd`;
-  const html = `
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  const text = `Active your newly registered account
+Hello,
+You or someone just registered a new NotionalApi account with this email.
+Your have 24h to to active your account by follow the link bellow
+Active Account Now (${activation_url})
+If it wasnt you, please ignore this email.
+Thank you,
+
+Unsubscribe ({{{unsubscribe}}}) - Unsubscribe Preferences ({{{unsubscribe_preferences}}})`;
+  const html = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -206,12 +213,11 @@ export const sendMailActive = async (recipient, activation_url) => {
         </div>
       </center>
     </body>
-  </html>
-  `;
+  </html>`;
 
   const msg = {
     to: recipient,
-    from: 'noreplay@notionalapi.com',
+    from: 'noreply@notionalapi.com',
     subject: 'Active your NotionalApi account',
     text,
     html,

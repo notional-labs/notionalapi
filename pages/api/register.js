@@ -14,19 +14,18 @@ export default async (req, res) => {
     const { email, password, confirm } = body;
 
     // basic validation
-    if (!body.name) return res.status(400).json({ data: 'name is required!' });
-    if (password) return res.status(400).json({ data: 'password is required!' });
-    if (password !== confirm) res.status(400).json({ data: 'password and confirm do not match!' });
+    if (!email) return res.send({ error: 'email is required!' });
+    if (!password) return res.send({ error: 'password is required!' });
+    if (password !== confirm) return res.send({ error: 'password and confirm do not match!' });
 
     // check no user with this email
-    const dbUser = findUserByEmail(email);
-    if (dbUser != null) res.status(400).json({ data: 'User exists with this email.' });
+    const dbUser = await findUserByEmail(email);
+    if (dbUser !== null) return res.send({ error: 'This email has been registered.' });
 
     // check no pending registration with this email
-    const dbReg = findRegistrationByEmail(email);
-    if (dbReg != null) res.status(400).json({ data: 'There is already pending registration with this email.' });
-
-    // TODO: validating more
+    const dbReg = await findRegistrationByEmail(email);
+    console.log(`dbReg=`, dbReg);
+    if (dbReg !== null) return res.send({ error: 'There is already pending registration with this email.' });
 
     const pass_hash = crypto.createHash('sha256').update(password).digest('hex');
     const activation_code = crypto.randomBytes(32).toString('hex');
@@ -40,7 +39,7 @@ export default async (req, res) => {
     const savedItem = await createRegistration(newItem);
 
     const activation_url = `https://notionalapi.com/reg_active?email=${email}&activation_code=${activation_code}`;
-    await sendMailActive(email, activation_url)
+    await sendMailActive(email, activation_url);
 
     res.send({email});
   }
