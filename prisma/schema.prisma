@@ -24,3 +24,9 @@ model Point {
   email String  @id
   point Int @default(0)
 }
+
+model Registration {
+  email String  @id
+  pass_hash  String?
+  created_at  DateTime @default(now())
+}
