@@ -35,3 +35,8 @@ export const createRegistration = async (newItem) => {
   const item = await prisma.registration.create({data: newItem});
   return item;
 }
+
+export const findRegistrationByEmail = async (email) => {
+  const item = await prisma.registration.findUnique({where: {email}});
+  return item;
+}
