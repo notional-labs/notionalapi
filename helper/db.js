@@ -30,3 +30,8 @@ export const deleteApiKey = async (key) => {
   const item = await prisma.apikey.delete({where: {apikey: key}});
   return item;
 }
+
+export const createRegistration = async (newItem) => {
+  const item = await prisma.registration.create({data: newItem});
+  return item;
+}
