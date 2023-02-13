@@ -27,6 +27,7 @@ model Point {
 
 model Registration {
   email String  @id
-  pass_hash  String?
-  created_at  DateTime @default(now())
+  pass_hash  String
+  activation_code  String
+  submitted_at  DateTime @default(now())
 }
