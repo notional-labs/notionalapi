@@ -51,7 +51,7 @@ const HeaderLoginButtons = () => {
   return (
     <Space wrap>
       <Button onClick={() => signIn()}>Login</Button>
-      <Button type="link">Register</Button>
+      <Link href='/signup'>Register</Link>
     </Space>
   )
 }

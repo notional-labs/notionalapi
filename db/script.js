@@ -72,6 +72,28 @@ async function main() {
     console.log(`Retrieved all apikeys: `, allApikeys);
   }
 
+  {
+    // Seed the database with regitration
+    // Charlie
+    const charlie_reg = await prisma.registration.create({
+      data: {
+        email: 'charlie@notionalapi.com',
+        pass_hash: 'b9dd960c1753459a78115d3cb845a57d924b6877e805b08bd01086ccdf34433c',
+        activation_code: 'b9dd960c1753459a78115d3cb845a57d924b6877e805b08bd01086ccdf34433c',
+        submitted_at: new Date(),
+      },
+    });
+    console.log(`Created 1 registration: ${charlie_reg.email}`);
+
+    // findUnique
+    const db_reg_charlie = await prisma.registration.findUnique({where: {email: charlie_reg.email}});
+    console.log(`findUnique: `, db_reg_charlie);
+
+    // Retrieve all registration
+    const allRegs = await prisma.registration.findMany({ })
+    console.log(`Retrieved all registrations: `, allRegs);
+  }
+
 }
 
 main()
