@@ -38,7 +38,7 @@ export default async (req, res) => {
 
     const savedItem = await createRegistration(newItem);
 
-    const activation_url = `https://notionalapi.com/reg_active?email=${email}&activation_code=${activation_code}`;
+    const activation_url = `${process.env.NEXTAUTH_URL}/reg_active?email=${email}&activation_code=${activation_code}`;
     await sendMailActive(email, activation_url);
 
     res.send({email});
