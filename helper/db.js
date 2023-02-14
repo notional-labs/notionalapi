@@ -50,3 +50,13 @@ export const deleteRegistration = async (email) => {
   const item = await prisma.registration.delete({where: {email}});
   return item;
 }
+
+export const findResetPassord = async (email) => {
+  const item = await prisma.resetpassord.findUnique({where: {email}});
+  return item;
+}
+
+export const createResetPassord = async (newItem) => {
+  const item = await prisma.resetpassord.create({data: newItem});
+  return item;
+}
