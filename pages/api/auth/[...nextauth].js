@@ -46,6 +46,9 @@ export const authOptions = {
       session.accessToken = token.accessToken
       // session.userRole = "user"
       return session
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl
     }
   }
 }
