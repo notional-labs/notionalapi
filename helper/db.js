@@ -11,6 +11,11 @@ export const findUserByEmail = async (email) => {
   return item;
 }
 
+export const updateUser = async (email, data) => {
+  const item = await prisma.user.update({where: {email}, data: {...data}});
+  return item;
+}
+
 export const listApiKeysByUser = async (email) => {
   const items = await prisma.apikey.findMany({where: {email}});
   return items;
@@ -48,5 +53,25 @@ export const findRegistrationByEmail = async (email) => {
 
 export const deleteRegistration = async (email) => {
   const item = await prisma.registration.delete({where: {email}});
+  return item;
+}
+
+export const findResetPassord = async (email) => {
+  const item = await prisma.resetPassord.findUnique({where: {email}});
+  return item;
+}
+
+export const createResetPassord = async (newItem) => {
+  const item = await prisma.resetPassord.create({data: newItem});
+  return item;
+}
+
+export const updateResetPassord = async (email, data) => {
+  const item = await prisma.resetPassord.update({where: {email}, data: {...data}});
+  return item;
+}
+
+export const deleteResetPassord = async (email) => {
+  const item = await prisma.resetPassord.delete({where: {email}});
   return item;
 }

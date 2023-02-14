@@ -31,3 +31,9 @@ model Registration {
   activation_code  String
   submitted_at  DateTime @default(now())
 }
+
+model ResetPassord {
+  email String  @id
+  activation_code  String
+  submitted_at  DateTime @default(now())
+}
