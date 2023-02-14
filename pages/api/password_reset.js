@@ -32,7 +32,7 @@ export default async (req, res) => {
       // check no pending registration with this email
       const dbResetPassord = await findResetPassord(email);
       console.log(`dbResetPassord=`, dbResetPassord);
-      if (dbResetPassord !== null) return res.send({status: "error", message: 'There is already pending password reset request with this email.'});
+      if (dbResetPassord === null) return res.send({status: "error", message: 'No password reset request found.'});
       if (dbResetPassord.activation_code !== activation_code) return res.send({status: "error", message: 'Invalid code.'});
 
       // change new pass

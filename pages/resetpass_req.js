@@ -9,7 +9,7 @@ export default function ResetPassRequest() {
 
   if (status === "loading" || loading) return <p>Loading...</p>
   if (status === "authenticated") return <p>You are already signed-in.</p>
-  if (result === "success") return <p>Success</p>
+  if (result === "success") return <p>Success, Check your email to continue.</p>
   if (result === "failed") return <p>Failed</p>
 
   const onFinish = async (values) => {

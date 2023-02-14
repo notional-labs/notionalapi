@@ -1,5 +1,6 @@
 import { findResetPassord } from "../helper/db";
 import { Button, Form, Input } from "antd";
+import { useState } from "react";
 const validator = require("email-validator");
 
 export async function getServerSideProps(ctx) {
@@ -28,9 +29,13 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function Home(props) {
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState("");
   const {status, data, message} = props;
 
   if (status !== "success") return <p>Something wrong!</p>;
+  if (result === "success") return <p>Success</p>
+  if (result === "failed") return <p>Failed</p>
 
   const {email, activation_code} = data;
 
@@ -52,9 +57,9 @@ export default function Home(props) {
         },
         body: JSON.stringify(extValues),
       });
-      const newReg = await rawResponse.json();
-      const {email} = newReg;
-      if (email) setResult("success");
+      const jsend = await rawResponse.json();
+      const {status} = jsend;
+      if (status === "success") setResult("success");
       else setResult("failed");
     } catch (e) {
       setResult("failed");
@@ -89,7 +94,6 @@ export default function Home(props) {
         </Form.Item>
         <Form.Item wrapperCol={{span: 16, offset: 8}}><Button type="primary" htmlType="submit">Submit</Button></Form.Item>
       </Form>
-      }
     </>
   );
 }
