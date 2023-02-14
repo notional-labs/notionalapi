@@ -14,25 +14,25 @@ export default function ResetPassRequest() {
 
   const onFinish = async (values) => {
     console.log('Received values of form: ', values);
-    // try {
-    //   setLoading(true);
-    //   const rawResponse = await fetch('/api/register', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(values),
-    //   });
-    //   const newReg = await rawResponse.json();
-    //   const {email} = newReg;
-    //   if (email) setResult("success");
-    //   else setResult("failed");
-    // } catch (e) {
-    //   setResult("failed");
-    // } finally {
-    //   setLoading(false);
-    // }
+    try {
+      setLoading(true);
+      const rawResponse = await fetch('/api/password_reset', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values),
+      });
+      const jsend = await rawResponse.json();
+      const {status, message, message} = jsend;
+      if (status === "success") setResult("success");
+      else setResult("failed");
+    } catch (e) {
+      setResult("failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
