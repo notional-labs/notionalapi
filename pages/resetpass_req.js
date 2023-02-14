@@ -16,7 +16,7 @@ export default function ResetPassRequest() {
     console.log('Received values of form: ', values);
     try {
       setLoading(true);
-      const rawResponse = await fetch('/api/password_reset', {
+      const rawResponse = await fetch('/api/password_reset_request', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -25,7 +25,7 @@ export default function ResetPassRequest() {
         body: JSON.stringify(values),
       });
       const jsend = await rawResponse.json();
-      const {status, message, message} = jsend;
+      const {status, data, message} = jsend;
       if (status === "success") setResult("success");
       else setResult("failed");
     } catch (e) {
