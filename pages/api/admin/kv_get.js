@@ -2,7 +2,7 @@ import {checkBasicAuth} from '/helper/basic_auth';
 
 export default async (req, res) => {
   // Basic Authentication
-  if (checkBasicAuth({req, res}) !== true) return res.send({error: "Access Denied."});
+  if (checkBasicAuth({req, res}) !== true) return res.status(403).send({error: "Access Denied."});
 
   const {query} = req;
   const {key} = query;
