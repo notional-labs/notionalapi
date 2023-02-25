@@ -11,7 +11,11 @@ export default async (req, res) => {
   try {
     const item = await getKeyValue(key);
 
-    return res.send({status: "success", data: {item}});
+    if (item == null) {
+      return res.send({status: "error", message: 'Not found'});
+    }
+
+    return res.send({status: "success", data: item});
   } catch(e) {
     console.log(e.stack);
     return res.send({status: "error", message: e.message});
