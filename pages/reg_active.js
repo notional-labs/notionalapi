@@ -1,5 +1,6 @@
 import { findRegistrationByEmail, createUser, deleteRegistration } from "../helper/db";
 const validator = require("email-validator");
+const CRC32 = require("crc-32");
 
 export async function getServerSideProps(ctx) {
   console.log('params=', ctx.query);
@@ -22,7 +23,8 @@ export async function getServerSideProps(ctx) {
     // create new user here
     const newUser = {
       email,
-      pass_hash: reg.pass_hash
+      pass_hash: reg.pass_hash,
+      payment_code: CRC32.bstr(email, 0).toString(16),
     }
     await createUser(newUser);
 

@@ -1,5 +1,6 @@
-const { PrismaClient } = require('@prisma/client')
-const prisma = new PrismaClient()
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+const CRC32 = require("crc-32");
 
 // A `main` function so that we can use async/await
 async function main() {
@@ -9,12 +10,14 @@ async function main() {
       data: {
         email: 'alice@notionalapi.com',
         pass_hash: '2bd806c97f0e00af1a1fc3328fa763a9269723c8db8fac4f93af71db186d6e90',
+        payment_code: CRC32.bstr('alice@notionalapi.com', 0).toString(16),
       },
     })
     const user2 = await prisma.user.create({
       data: {
         email: 'bob@notionalapi.com',
         pass_hash: '81b637d8fcd2c6da6359e6963113a1170de795e4b725b84d1e0b4cfd9ec58ce9',
+        payment_code: CRC32.bstr('bob@notionalapi.com', 0).toString(16),
       },
     })
     console.log(`Created users: ${user1.email} (password alice) and ${user2.email}(password bob) `);
