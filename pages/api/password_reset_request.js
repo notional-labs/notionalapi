@@ -13,7 +13,7 @@ export default async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
   if (session) {
-    res.send({status: "error", message: 'You are already signed-in.'});
+    return res.send({status: "error", message: 'You are already signed-in.'});
   } else {
     try {
       const body = req.body;
@@ -22,7 +22,7 @@ export default async (req, res) => {
 
       // basic validation
       if (!email) return res.send({status: "error", message: 'email is required.'});
-      if (validator.validate(email) !== true) res.send({status: "error", message: 'email is invalid.'});
+      if (validator.validate(email) !== true) return res.send({status: "error", message: 'email is invalid.'});
 
       // check no user with this email
       const dbUser = await findUserByEmail(email);

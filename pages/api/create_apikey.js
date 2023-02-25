@@ -27,8 +27,8 @@ export default async (req, res) => {
 
     const item = await createApiKey(newkey);
 
-    res.send(item);
+    return res.send(item);
   } else {
-    res.send({error: "Access Denied.",})
+    return res.send({error: "Access Denied.",})
   }
 }

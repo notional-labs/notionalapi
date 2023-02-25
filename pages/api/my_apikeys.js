@@ -7,8 +7,8 @@ export default async (req, res) => {
   if (session) {
     const apikeys = await listApiKeysByUser(session.user.email)
 
-    res.send(apikeys);
+    return res.send(apikeys);
   } else {
-    res.send({error: "Access Denied.",})
+    return res.send({error: "Access Denied.",})
   }
 }

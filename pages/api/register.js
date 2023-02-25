@@ -7,7 +7,7 @@ const crypto = require("crypto");
 export default async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
   if (session) {
-    res.send({error: "You are already signed-in.",})
+    return res.send({error: "You are already signed-in.",})
   } else {
     const body = req.body;
     console.log('body: ', body);
@@ -41,6 +41,6 @@ export default async (req, res) => {
     const activation_url = `${process.env.NEXTAUTH_URL}/reg_active?email=${email}&activation_code=${activation_code}`;
     await sendMailActive(email, activation_url);
 
-    res.send({email});
+    return res.send({email});
   }
 }

@@ -7,8 +7,8 @@ export default async (req, res) => {
   if (session) {
     const point = await findPoint(session.user.email)
 
-    res.send(point);
+    return res.send(point);
   } else {
-    res.send({error: "Access Denied.",})
+    return res.send({error: "Access Denied.",})
   }
 }

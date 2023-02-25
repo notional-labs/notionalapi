@@ -12,7 +12,7 @@ export default async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
   if (session) {
-    res.send({status: "error", message: 'You are already signed-in.'});
+    return res.send({status: "error", message: 'You are already signed-in.'});
   } else {
     try {
       const body = req.body;
