@@ -37,3 +37,17 @@ model ResetPassord {
   activation_code  String
   submitted_at  DateTime @default(now())
 }
+
+// ------------------------
+// for payment processing
+
+model Payment {
+  tx_hash String  @id
+  tx_value  String
+  // how much uSDC for a million points. Price could be changed so this record the price at the processing time.
+  price Int @default(0)
+  amount Int @default(0)
+  status Int @default(0)
+  processed_at  DateTime @default(now())
+  result  String
+}
