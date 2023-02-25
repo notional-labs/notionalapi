@@ -4,7 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "dev_db_init": "rm -f prisma/dev.db && prisma db push && node ./db/script.js"
+    "dev_db_init": "rm -f prisma/dev.db && prisma db push && node ./db/script.js",
+    "payment_watch": "node payment_watcher.js"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
@@ -23,6 +24,7 @@
     "swr": "^2.0.3"
   },
   "devDependencies": {
+    "@cosmjs/stargate": "^0.29.5",
     "@sendgrid/mail": "^7.7.0",
     "prisma": "^4.10.1"
   }
