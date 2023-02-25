@@ -10,6 +10,7 @@ datasource db {
 model User {
   email String  @id
   pass_hash  String?
+  payment_code String @unique
 }
 
 model Apikey {
@@ -44,10 +45,13 @@ model ResetPassord {
 model Payment {
   tx_hash String  @id
   tx_value  String
+  // extract from tx memo, ref to User.payment_code
+  payment_code String
   // how much uSDC for a million points. Price could be changed so this record the price at the processing time.
   price Int @default(0)
   amount Int @default(0)
+  point Int @default(0)
   status Int @default(0)
   processed_at  DateTime @default(now())
-  result  String
+  result  String?
 }
