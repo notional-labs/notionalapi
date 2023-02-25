@@ -1,5 +1,5 @@
 import {checkBasicAuth} from '/helper/basic_auth';
-import { getKeyValue } from "../../../helper/db";
+import { getKeyValue } from "/helper/db";
 
 export default async (req, res) => {
   // Basic Authentication
@@ -9,7 +9,7 @@ export default async (req, res) => {
   const {key} = query;
 
   try {
-    const item = getKeyValue(key);
+    const item = await getKeyValue(key);
 
     return res.send({status: "success", data: {item}});
   } catch(e) {

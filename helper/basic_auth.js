@@ -4,7 +4,7 @@ const isEmpty = (value) => {
 }
 
 const checkAuth = (username, password) => {
-  if (username === 'admin' && password === 'admin') {
+  if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
     return true;
   }
   return false;
