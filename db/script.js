@@ -97,6 +97,27 @@ async function main() {
     console.log(`Retrieved all registrations: `, allRegs);
   }
 
+  {
+    // Seed the database with users
+    const kv1 = await prisma.kv.create({
+      data: {
+        key: 'key1',
+        value: 'value1',
+      },
+    })
+    const kv2 = await prisma.kv.create({
+      data: {
+        key: 'key2',
+        value: 'value2',
+      },
+    })
+    console.log(`Created key/value pairs: ${kv1.key}/${kv1.value} and ${kv2.key}/${kv2.value}`);
+
+    // Retrieve all users
+    const allKvs = await prisma.kv.findMany({ })
+    console.log(`Retrieved all key/value pairs: `, allKvs)
+  }
+
 }
 
 main()

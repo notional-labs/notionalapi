@@ -55,3 +55,11 @@ model Payment {
   processed_at  DateTime @default(now())
   result  String?
 }
+
+// ------------------------
+// kv table to store last state of payment processor or anything else
+
+model Kv {
+  key String  @id
+  value  String
+}
