@@ -18,8 +18,8 @@ export default async (req, res) => {
 
     const deletedApiKey = await deleteApiKey(apikey);
 
-    res.send(deletedApiKey);
+    return res.send(deletedApiKey);
   } else {
-    res.send({error: "Access Denied.",})
+    return res.send({error: "Access Denied.",})
   }
 }

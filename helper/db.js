@@ -75,3 +75,21 @@ export const deleteResetPassord = async (email) => {
   const item = await prisma.resetPassord.delete({where: {email}});
   return item;
 }
+
+export const setKeyValue = async (newItem) => {
+  const item = await prisma.kv.upsert({
+    where: {
+      key: newItem.key,
+    },
+    update: {
+      value: newItem.value,
+    },
+    create: newItem,
+  })
+  return item;
+}
+
+export const getKeyValue = async (key) => {
+  const item = await prisma.kv.findUnique({where: {key}});
+  return item;
+}
