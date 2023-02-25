@@ -29,7 +29,10 @@ const getLastProcessedBlock = async ({client}) => {
   const url = "http://localhost:3000/api/admin/kv_get?key=" + LAST_PROCESSED_HEIGHT;
   const response = await fetch(url, {
     method: 'GET',
-    headers: {'Authorization': 'Basic ' + btoa(process.env.ADMIN_USERNAME + ':' + process.env.ADMIN_PASSWORD)},
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(process.env.ADMIN_USERNAME + ':' + process.env.ADMIN_PASSWORD)
+    },
   });
   const json = await response.json();
   console.log('getLastProcessedBlock', json);
@@ -49,6 +52,65 @@ const getLastProcessedBlock = async ({client}) => {
   }
 }
 
+const saveLastProcessedBlock = async (height) => {
+  const url = 'http://localhost:3000/api/admin/kv_set';
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa(process.env.ADMIN_USERNAME + ':' + process.env.ADMIN_PASSWORD)
+    },
+    body: JSON.stringify({key: LAST_PROCESSED_HEIGHT, value: `${height}`}),
+  });
+  const json = await response.json();
+  const {status, data, message} = json;
+  if (status === 'success') {
+    return true;
+  } else if (status === 'error') {
+    return false;
+  }
+}
+
+
+const processTx = async (tx) => {
+  // console.log(tx);
+  const txHash = toHex(sha256(Buffer.from(tx,'base64')));
+  // console.log(txHash);
+
+  const decodedTx = Tx.decode(tx);
+  // console.log("DecodedTx:", decodedTx);
+  const {memo, messages} = decodedTx.body;
+  // console.log("Decoded messages:", messages);
+  for (const msg of decodedTx.body.messages) {
+    if (msg.typeUrl == '/cosmos.bank.v1beta1.MsgSend') {
+      const sendMessage = MsgSend.decode(msg.value);
+      console.log("Sent message:", sendMessage, " with memo ", memo);
+      const {fromAddress, toAddress, amount} = sendMessage;
+
+      // {
+      //   fromAddress: 'osmo1tl9nq9e7jle92cxeas9c4qcaqnvdguwx9ue3qu',
+      //   toAddress: 'osmo1038lvdayf3c96lpu05c09rf3jua2jhycvcavw5',
+      //   amount: [
+      //     {
+      //       denom: 'ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858',
+      //       amount: '3000000000'
+      //     }
+      //   ]
+      // }
+
+      if ((toAddress == WATCH_ADDR) && (amount.denom === WATCH_DENOM)) {
+        const amount_number = Uint53.fromString(amount[0].amount).toNumber();
+        console.log("amount_number:", amount_number);
+
+        if (amount_number > 0) {
+
+          // TODO: insert to db for processing
+        }
+      }
+    }
+  }
+}
+
 const processBlock = async ({height, client}) => {
   console.log("processBlock: ", height);
   const block = await client.getBlock(height); // 7883467
@@ -56,46 +118,7 @@ const processBlock = async ({height, client}) => {
   const {txs} = block;
 
   for (const tx of txs) {
-    // console.log(tx);
-
-    const txHash = toHex(sha256(Buffer.from(tx,'base64')));
-    // console.log(txHash);
-
-    const decodedTx = Tx.decode(tx);
-    // console.log("DecodedTx:", decodedTx);
-    const {memo, messages} = decodedTx.body;
-    // console.log("Decoded messages:", messages);
-    for (const msg of decodedTx.body.messages) {
-      if (msg.typeUrl == '/cosmos.bank.v1beta1.MsgSend') {
-        const sendMessage = MsgSend.decode(msg.value);
-        console.log("Sent message:", sendMessage, " with memo ", memo);
-        const {fromAddress, toAddress, amount} = sendMessage;
-
-        // {
-        //   fromAddress: 'osmo1tl9nq9e7jle92cxeas9c4qcaqnvdguwx9ue3qu',
-        //   toAddress: 'osmo1038lvdayf3c96lpu05c09rf3jua2jhycvcavw5',
-        //   amount: [
-        //     {
-        //       denom: 'ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858',
-        //       amount: '3000000000'
-        //     }
-        //   ]
-        // }
-
-        if ((toAddress == WATCH_ADDR) && (amount.denom === WATCH_DENOM)) {
-          const amount_number = Uint53.fromString(amount[0].amount).toNumber();
-          console.log("amount_number:", amount_number);
-
-          if (amount_number > 0) {
-
-            // TODO: insert to db for processing
-          }
-
-
-
-        }
-      }
-    }
+    await processTx(tx);
   }
 }
 
@@ -107,6 +130,7 @@ main = async () => {
   while (true) {
     try {
       await processBlock({height, client});
+      await saveLastProcessedBlock(height);
       height++;
     } catch(e) {
       console.log(e);
