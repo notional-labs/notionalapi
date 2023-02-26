@@ -1,6 +1,7 @@
 import { Statistic, Button, Space } from 'antd';
 import { useSession } from "next-auth/react";
 import useSWR from 'swr';
+import Link from "next/link";
 
 const fetcher = (...args) => fetch(...args).then(res => res.json());
 
@@ -16,7 +17,7 @@ export default function Points() {
     <>
       <Space>
         <h3>Points</h3>
-        <Button>Buy Points</Button>
+        <Link href='/buy_points'><Button>Buy Points</Button></Link>
       </Space>
       <Statistic title="Your points" value={data.point} precision={0}/>
     </>
