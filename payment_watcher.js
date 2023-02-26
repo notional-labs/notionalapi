@@ -14,7 +14,7 @@ const { toHex } = require("@cosmjs/encoding");
 const { Uint53 } = require("@cosmjs/math");
 const fetch = require('node-fetch-commonjs');
 
-const WATCH_ADDR = 'osmo1038lvdayf3c96lpu05c09rf3jua2jhycvcavw5';
+const WATCH_ADDR = 'osmo1rgawxwzxg35pcasr94herz4y665n2u7jul0n04';
 const WATCH_DENOM = 'ibc/D189335C6E4A68B513C10AB227BF1C1D38C746766278BA3EEB4FB14124F1D858';
 const LAST_PROCESSED_HEIGHT = 'payment.watch.height';
 require('dotenv').config({ path: '.env' });
